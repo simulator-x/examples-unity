@@ -43,6 +43,8 @@ package simx.applications.examples.unity
  * Federal Ministry of Education and Research (grant no. 17N4409).
  */
 
+import simx.core.components.renderer.setup.BasicDisplayConfiguration
+
 import util.Random
 import collection.immutable
 import simplex3d.math.float._
@@ -64,7 +66,8 @@ import simx.applications.examples.unity.objects.{Sounds, Light, Table, Ball}
 
 /**
  * TODO: Document
- * @author Dennis Wiebusch, Martin Fischbach
+  *
+  * @author Dennis Wiebusch, Martin Fischbach
  */
 object UnityExample extends SimXApplicationMain[UnityExample] {
   val useEditor = false//askForOption("Use Editor Component?")
@@ -80,7 +83,7 @@ with JVRInit with OpenALInit with RemoteCreation with EventProvider with EventHa
   val gfxName = 'renderer
 
   override protected def applicationConfiguration = ApplicationConfig withComponent
-    JVRComponentAspect(gfxName) /*on "renderNode"*/ and
+    JVRComponentAspect(gfxName,  BasicDisplayConfiguration(800, 600, fullscreen = false)) /*on "renderNode"*/ and
     JBulletComponentAspect(physicsName, ConstVec3(0, -9.81f, 0)) /*on "physicsNode"*/ and
     LWJGLSoundComponentAspect(soundName) /*on "soundNode"*/ and
     UnityComponentAspect('unity, "localhost", 8000) and
